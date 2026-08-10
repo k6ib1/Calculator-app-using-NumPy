@@ -1,4 +1,22 @@
-# frontend created with tkinter ( claude ai )
+"""
+gui_calculator.py
+
+A tkinter maths calculator with separate tabbed sections:
+    1. Basic       - arithmetic expression evaluator
+    2. Matrix      - add / subtract / multiply / transpose / inverse / det / eigen
+    3. Statistics  - mean / median / std / var / min / max / sum on a dataset
+    4. Linear Algebra - solve Ax = b
+    5. Functions   - sin / cos / tan / exp / log / sqrt / square / cbrt
+
+This file only handles the GUI. All maths is delegated to calculator_backend.py,
+which you can implement using numpy — this file already calls every backend
+function and displays whatever comes back, so you don't need to touch the GUI
+code to add your maths logic.
+
+Run with:
+    python gui_calculator.py
+"""
+
 import tkinter as tk
 from tkinter import ttk, messagebox
 
@@ -28,7 +46,7 @@ class BasicTab(ttk.Frame):
     def __init__(self, parent):
         super().__init__(parent, padding=15)
 
-        ttk.Label(self, text="Enter expression:").pack(anchor="w")
+        ttk.Label(self, text="Enter expression: (see functions for trig expressions)").pack(anchor="w")
         self.expr_var = tk.StringVar()
         entry = ttk.Entry(self, textvariable=self.expr_var, font=("Consolas", 14))
         entry.pack(fill="x", pady=5)
