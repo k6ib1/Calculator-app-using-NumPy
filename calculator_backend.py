@@ -31,8 +31,8 @@ def parse_vector(text: str) -> np.ndarray:
 
 def evaluate_expression(expression: str):
 
-
-    
+    solution = eval(expression)
+    return solution
     raise NotImplementedError("evaluate_expression is not implemented yet")
 
 # ---------------------------------------------------------------------------
