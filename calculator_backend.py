@@ -106,3 +106,6 @@ def apply_function(name: str, value: float, use_degrees: bool = False):
     (relevant for sin/cos/tan only — remember to convert with np.radians).
     """
     raise NotImplementedError("apply_function is not implemented yet")
+
+
+# to add a GraphTab that uses matplotlib
