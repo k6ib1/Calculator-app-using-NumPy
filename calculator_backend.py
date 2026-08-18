@@ -72,27 +72,32 @@ def matrix_add(a: np.ndarray, b: np.ndarray):
 
 
 def matrix_subtract(a: np.ndarray, b: np.ndarray):
+    return(a-b)
     raise NotImplementedError("matrix_subtract is not implemented yet")
 
 
 def matrix_multiply(a: np.ndarray, b: np.ndarray):
+    return(a @ b)
     raise NotImplementedError("matrix_multiply is not implemented yet")
 
 
 def matrix_transpose(a: np.ndarray):
+    return np.transpose(a)
     raise NotImplementedError("matrix_transpose is not implemented yet")
 
 
 def matrix_inverse(a: np.ndarray):
+    return np.invert(a)
     raise NotImplementedError("matrix_inverse is not implemented yet")
 
 
 def matrix_determinant(a: np.ndarray):
+    np.linalg.det(a)
     raise NotImplementedError("matrix_determinant is not implemented yet")
 
 
 def matrix_eigen(a: np.ndarray):
-    """Should return a tuple/string containing (eigenvalues, eigenvectors)."""
+    return np.linalg.eig(a)
     raise NotImplementedError("matrix_eigen is not implemented yet")
 
 
