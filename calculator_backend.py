@@ -137,4 +137,28 @@ def apply_function(name: str, value: float, use_degrees: bool = False):
     """
     raise NotImplementedError("apply_function is not implemented yet")
 
-# to add a GraphTab that uses matplotlib
+# ---------------------------------------------------------------------------
+# 6. Graphing
+# ---------------------------------------------------------------------------
+
+def generate_plot_data(expression: str, x_min: float, x_max: float, num_points: int = 500):
+    """
+    Given a function of x as a string (e.g. "sin(x)", "x**2 - 3*x + 1"),
+    return (x, y) as two numpy arrays ready to be plotted.
+
+    TODO: implement this. A typical approach:
+
+        x = np.linspace(x_min, x_max, num_points)
+        allowed_names = {
+            "x": x, "sin": np.sin, "cos": np.cos, "tan": np.tan,
+            "exp": np.exp, "log": np.log, "sqrt": np.sqrt,
+            "pi": np.pi, "e": np.e, "abs": np.abs,
+        }
+        y = eval(expression, {"__builtins__": {}}, allowed_names)
+        return x, y
+
+    Because `x` is a numpy array, eval'ing an expression like "x**2" or
+    "sin(x)" automatically works elementwise thanks to numpy broadcasting —
+    no loop needed.
+    """
+    raise NotImplementedError("generate_plot_data is not implemented yet")
