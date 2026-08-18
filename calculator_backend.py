@@ -1,9 +1,33 @@
+"""
+calculator_backend.py
+
+Backend logic for the NumPy Maths Calculator GUI.
+
+The GUI (gui_calculator.py) imports this module and calls these functions.
+Parsing helpers are already implemented for you. The actual maths functions
+are left as TODOs — implement them using numpy, and the GUI will "just work"
+since it already calls them and displays whatever they return.
+
+Each function currently raises NotImplementedError; the GUI catches that
+and shows a friendly "Not implemented yet" message, so you can run the app
+immediately and fill functions in one at a time.
+"""
+
 import numpy as np
 
+
+# ---------------------------------------------------------------------------
+# Parsing helpers (already implemented for you)
+# ---------------------------------------------------------------------------
+
 def parse_matrix(text: str) -> np.ndarray:
+    """
+    Convert a block of text into a numpy 2D array.
+    Rows are separated by newlines; values within a row by spaces or commas.
 
-# converts a block of text into a numpy 2D array
-
+    Example input:
+        "1 2 3\n4 5 6\n7 8 9"
+    """
     rows = [r.strip() for r in text.strip().splitlines() if r.strip()]
     if not rows:
         raise ValueError("No matrix data entered.")
@@ -12,11 +36,14 @@ def parse_matrix(text: str) -> np.ndarray:
         row = row.replace(",", " ")
         values = [float(v) for v in row.split()]
         matrix.append(values)
-    return np.array(matrix)  
+    return np.array(matrix)
+
 
 def parse_vector(text: str) -> np.ndarray:
-
-  # converts text into a 1D numpy array
+    """
+    Convert text into a 1D numpy array.
+    Values may be separated by spaces, commas, or newlines.
+    """
     text = text.replace(",", " ").replace("\n", " ")
     values = [float(v) for v in text.split()]
     if not values:
@@ -28,18 +55,19 @@ def parse_vector(text: str) -> np.ndarray:
 # 1. Basic calculator
 # ---------------------------------------------------------------------------
 
-
 def evaluate_expression(expression: str):
 
     solution = eval(expression)
     return solution
     raise NotImplementedError("evaluate_expression is not implemented yet")
 
+
 # ---------------------------------------------------------------------------
 # 2. Matrix operations
 # ---------------------------------------------------------------------------
 
 def matrix_add(a: np.ndarray, b: np.ndarray):
+    return(a + b)
     raise NotImplementedError("matrix_add is not implemented yet")
 
 
@@ -106,6 +134,5 @@ def apply_function(name: str, value: float, use_degrees: bool = False):
     (relevant for sin/cos/tan only — remember to convert with np.radians).
     """
     raise NotImplementedError("apply_function is not implemented yet")
-
 
 # to add a GraphTab that uses matplotlib
