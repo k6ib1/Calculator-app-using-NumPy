@@ -19,6 +19,8 @@ Run with:
 
 import tkinter as tk
 from tkinter import ttk, messagebox
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 
 import calculator_backend as backend
 
@@ -268,6 +270,75 @@ class FunctionsTab(ttk.Frame):
         )
         if ok:
             self.result_var.set(str(result))
+
+# ---------------------------------------------------------------------------
+# 6. Graphing tab
+# ---------------------------------------------------------------------------
+
+class GraphTab(ttk.Frame):
+    def __init__(self, parent):
+        super().__init__(parent, padding=15)
+
+        controls = ttk.Frame(self)
+        controls.pack(fill="x")
+
+        ttk.Label(controls, text="f(x) =").pack(side="left")
+        self.expr_var = tk.StringVar(value="sin(x)")
+        ttk.Entry(controls, textvariable=self.expr_var, width=25, font=("Consolas", 12)).pack(
+            side="left", padx=5
+        )
+
+        ttk.Label(controls, text="x min:").pack(side="left", padx=(15, 0))
+        self.xmin_var = tk.StringVar(value="-10")
+        ttk.Entry(controls, textvariable=self.xmin_var, width=8).pack(side="left", padx=5)
+
+        ttk.Label(controls, text="x max:").pack(side="left")
+        self.xmax_var = tk.StringVar(value="10")
+        ttk.Entry(controls, textvariable=self.xmax_var, width=8).pack(side="left", padx=5)
+
+        ttk.Label(controls, text="points:").pack(side="left")
+        self.points_var = tk.StringVar(value="500")
+        ttk.Entry(controls, textvariable=self.points_var, width=8).pack(side="left", padx=5)
+
+        ttk.Button(controls, text="Plot", command=self.compute).pack(side="left", padx=15)
+
+        # Matplotlib figure embedded inside the tkinter frame
+        self.figure = Figure(figsize=(6, 4), dpi=100)
+        self.ax = self.figure.add_subplot(111)
+        self.ax.grid(True, alpha=0.3)
+
+        self.canvas = FigureCanvasTkAgg(self.figure, master=self)
+        self.canvas.get_tk_widget().pack(fill="both", expand=True, pady=10)
+
+        # Toolbar gives zoom / pan / save-as-image controls, same as Jupyter's
+        # interactive matplotlib widgets
+        toolbar = NavigationToolbar2Tk(self.canvas, self, pack_toolbar=False)
+        toolbar.update()
+        toolbar.pack(fill="x")
+
+    def compute(self):
+        try:
+            x_min = float(self.xmin_var.get())
+            x_max = float(self.xmax_var.get())
+            num_points = int(self.points_var.get())
+        except ValueError:
+            messagebox.showerror("Error", "x min / x max / points must be numbers.")
+            return
+
+        ok, data = run_safely(
+            backend.generate_plot_data, self.expr_var.get(), x_min, x_max, num_points
+        )
+        if not ok:
+            return
+
+        x, y = data
+        self.ax.clear()
+        self.ax.plot(x, y)
+        self.ax.grid(True, alpha=0.3)
+        self.ax.set_xlabel("x")
+        self.ax.set_ylabel("f(x)")
+        self.ax.set_title(self.expr_var.get())
+        self.canvas.draw()
 
 
 # ---------------------------------------------------------------------------
