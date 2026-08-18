@@ -4,13 +4,8 @@ calculator_backend.py
 Backend logic for the NumPy Maths Calculator GUI.
 
 The GUI (gui_calculator.py) imports this module and calls these functions.
-Parsing helpers are already implemented for you. The actual maths functions
-are left as TODOs — implement them using numpy, and the GUI will "just work"
-since it already calls them and displays whatever they return.
+Parsing helpers are already implemented for you. 
 
-Each function currently raises NotImplementedError; the GUI catches that
-and shows a friendly "Not implemented yet" message, so you can run the app
-immediately and fill functions in one at a time.
 """
 
 import numpy as np
