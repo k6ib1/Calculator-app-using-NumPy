@@ -364,6 +364,7 @@ class CalculatorApp(tk.Tk):
         notebook.add(StatsTab(notebook), text="Statistics")
         notebook.add(LinAlgTab(notebook), text="Linear Algebra")
         notebook.add(FunctionsTab(notebook), text="Functions")
+        notebook.add(GraphTab(notebook), text="Graph")
 
 
 if __name__ == "__main__":
